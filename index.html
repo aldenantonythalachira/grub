@@ -512,7 +512,7 @@
                             </div>
                         </div>
                         <div class="flex justify-between text-sm">
-                            <span>GB England</span>
+                            <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</span>
                             <span>All-rounder</span>
                         </div>
                     </div>
@@ -797,7 +797,6 @@
             });
         });
 
-
         // FAQ toggle functionality
         function toggleFAQ(faqNumber) {
             const content = document.getElementById(`faq-content-${faqNumber}`);
@@ -824,6 +823,20 @@
                 behavior: 'smooth'
             });
         });
+
+        // Instagram Followers functionality
+        function filterPlayers(category) {
+            const playerCards = document.querySelectorAll('.player-card');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            // Update button styles
+            filterButtons.forEach(btn => {
+                btn.classList.remove('bg-gradient-to-r', 'from-purple-500', 'to-pink-500');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('bg-gradient-to-r', 'from-purple-500', 'to-pink-500', 'text-white');
             
             // Filter players
             playerCards.forEach(card => {
@@ -834,7 +847,6 @@
                 }
             });
         }
-
     </script>
 </body>
 </html>
