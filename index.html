@@ -1781,112 +1781,6 @@
             });
         });
 
-        // Quiz functionality
-        const quizData = [
-            {
-                question: "Which country has won the most Cricket World Cups?",
-                options: ["India", "Australia", "England", "West Indies"],
-                correct: 1
-            },
-            {
-                question: "What does ICC stand for?",
-                options: ["Indian Cricket Council", "International Cricket Committee", "International Cricket Council", "Independent Cricket Council"],
-                correct: 2
-            },
-            {
-                question: "How many players are there in a cricket team on the field?",
-                options: ["10", "11", "12", "9"],
-                correct: 1
-            },
-            {
-                question: "Which format of cricket has 20 overs per side?",
-                options: ["Test", "ODI", "T20", "T10"],
-                correct: 2
-            },
-            {
-                question: "What is the maximum number of overs a bowler can bowl in an ODI?",
-                options: ["8", "10", "12", "15"],
-                correct: 1
-            }
-        ];
-
-        let currentQuestion = 0;
-        let score = 0;
-        let selectedAnswers = [];
-
-        function updateQuiz() {
-            if (currentQuestion < quizData.length) {
-                const question = quizData[currentQuestion];
-                document.getElementById('question-number').textContent = currentQuestion + 1;
-                document.getElementById('question-text').textContent = question.question;
-                document.getElementById('progress-bar').style.width = ((currentQuestion + 1) / quizData.length) * 100 + '%';
-                
-                const options = document.querySelectorAll('.quiz-option');
-                options.forEach((option, index) => {
-                    option.textContent = String.fromCharCode(65 + index) + ') ' + question.options[index];
-                    option.classList.remove('bg-blue-200', 'bg-green-200', 'bg-red-200');
-                    option.disabled = false;
-                });
-                
-                document.getElementById('prev-btn').disabled = currentQuestion === 0;
-                document.getElementById('next-btn').style.display = currentQuestion === quizData.length - 1 ? 'none' : 'block';
-            }
-        }
-
-        function selectAnswer(answerIndex) {
-            selectedAnswers[currentQuestion] = answerIndex;
-            const options = document.querySelectorAll('.quiz-option');
-            options.forEach((option, index) => {
-                option.classList.remove('bg-blue-200');
-                if (index === answerIndex) {
-                    option.classList.add('bg-blue-200');
-                }
-            });
-        }
-
-        function nextQuestion() {
-            if (selectedAnswers[currentQuestion] !== undefined) {
-                currentQuestion++;
-                if (currentQuestion < quizData.length) {
-                    updateQuiz();
-                } else {
-                    showResults();
-                }
-            }
-        }
-
-        function previousQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                updateQuiz();
-                if (selectedAnswers[currentQuestion] !== undefined) {
-                    selectAnswer(selectedAnswers[currentQuestion]);
-                }
-            }
-        }
-
-        function showResults() {
-            score = 0;
-            selectedAnswers.forEach((answer, index) => {
-                if (answer === quizData[index].correct) {
-                    score++;
-                }
-            });
-            
-            document.getElementById('quiz-container').classList.add('hidden');
-            document.getElementById('quiz-results').classList.remove('hidden');
-            document.getElementById('final-score').textContent = score;
-        }
-
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            selectedAnswers = [];
-            document.getElementById('quiz-container').classList.remove('hidden');
-            document.getElementById('quiz-results').classList.add('hidden');
-            document.getElementById('next-btn').style.display = 'block';
-            updateQuiz();
-        }
 
         // FAQ toggle functionality
         function toggleFAQ(faqNumber) {
@@ -1914,20 +1808,6 @@
                 behavior: 'smooth'
             });
         });
-
-        // Instagram Followers functionality
-        function filterPlayers(category) {
-            const playerCards = document.querySelectorAll('.player-card');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            
-            // Update button styles
-            filterButtons.forEach(btn => {
-                btn.classList.remove('bg-gradient-to-r', 'from-purple-500', 'to-pink-500');
-                btn.classList.add('bg-gray-200', 'text-gray-700');
-            });
-            
-            event.target.classList.remove('bg-gray-200', 'text-gray-700');
-            event.target.classList.add('bg-gradient-to-r', 'from-purple-500', 'to-pink-500', 'text-white');
             
             // Filter players
             playerCards.forEach(card => {
@@ -1939,30 +1819,6 @@
             });
         }
 
-        function viewProfile(username) {
-            // Simulate opening Instagram profile
-            alert(`Opening @${username} Instagram profile...`);
-            // In a real application, this would open the actual Instagram profile
-            // window.open(`https://instagram.com/${username}`, '_blank');
-        }
-
-        // Search functionality
-        document.getElementById('player-search').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const playerCards = document.querySelectorAll('.player-card');
-            
-            playerCards.forEach(card => {
-                const playerName = card.querySelector('h4').textContent.toLowerCase();
-                const username = card.querySelector('p').textContent.toLowerCase();
-                const team = card.querySelector('span').textContent.toLowerCase();
-                
-                if (playerName.includes(searchTerm) || username.includes(searchTerm) || team.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
     </script>
 </body>
 </html>
